@@ -73,6 +73,10 @@ class ApiGateway(BaseResource):
     def get_authorization_type(self, resource):
         return resource.get('authorization_type', 'NONE')
 
+    def get_authorization_id(self, resource):
+            return resource.get('authorization_id', 'NONE')
+
+
     def get_api_key_required(self, resource):
         return self._get_true_false('api_key_required', 'f', settings=resource)
 
@@ -260,6 +264,7 @@ class ApiGateway(BaseResource):
                     utils.valid_cloudformation_name(*method_name),
                     HttpMethod=method,
                     AuthorizationType=self.get_authorization_type(configuration),
+                    AuthorizationId=elf.get_authorization_id(configuration),
                     ApiKeyRequired=self.get_api_key_required(configuration),
                     Integration=self.get_integration(configuration, invoke_lambda_role),
                     MethodResponses=self.get_method_responses(configuration),
