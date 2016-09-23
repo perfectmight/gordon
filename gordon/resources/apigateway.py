@@ -264,7 +264,7 @@ class ApiGateway(BaseResource):
                     utils.valid_cloudformation_name(*method_name),
                     HttpMethod=method,
                     AuthorizationType=self.get_authorization_type(configuration),
-                    AuthorizationId=elf.get_authorization_id(configuration),
+                    AuthorizationId=self.get_authorization_id(configuration),
                     ApiKeyRequired=self.get_api_key_required(configuration),
                     Integration=self.get_integration(configuration, invoke_lambda_role),
                     MethodResponses=self.get_method_responses(configuration),
